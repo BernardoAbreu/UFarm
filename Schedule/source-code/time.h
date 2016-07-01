@@ -6,6 +6,9 @@
 #define __TIME_H__
 
 #include <iostream>
+#include <ctime>
+
+using namespace std;
 
 class Time{
 
@@ -17,7 +20,7 @@ class Time{
       // constructor
       Time(const time_t time);
 
-      Time(const struct tm * time){
+      Time(const struct tm * time);
 
       // destructor
       //˜Time();
@@ -28,25 +31,25 @@ class Time{
       // copy assignment
       Time& operator=(const Time& v);
 
-      Time getCurrentTime();
+      Time& getCurrentTime();
 
-      int getSecond() const { return tm_sec; }    // seconds of minutes from 0 to 61
+      int getSecond() const { return ttme->tm_sec; }    // seconds of minutes from 0 to 61
 
-      int getMinute() const { return tm_min; }    // minutes of hour from 0 to 59}
+      int getMinute() const { return ttme->tm_min; }    // minutes of hour from 0 to 59}
   
-  		int getHour() const { return  tm_hour; }    // hours of day from 0 to 24
+  		int getHour() const { return  ttme->tm_hour; }    // hours of day from 0 to 24
   
-  		int getDay() const { return tm_mday; }      // day of month from 1 to 31
+  		int getDay() const { return ttme->tm_mday; }      // day of month from 1 to 31
 
-  		int getMonth() const { return tm_mon; }     // month of year from 0 to 11
+  		int getMonth() const { return ttme->tm_mon; }     // month of year from 0 to 11
 
-  		int getYear() const { return tm_year; }     // year since 1900
+  		int getYear() const { return ttme->tm_year; }     // year since 1900
 
-  		int getWeekDay() const { return tm_wday; }  // days since sunday
+  		int getWeekDay() const { return ttme->tm_wday; }  // days since sunday
 
-  		int getYearDay() const { return tm_yday; }  // days since January 1st
+  		int getYearDay() const { return ttme->tm_yday; }  // days since January 1st
 
-  		int getHourDST() const { return tm_isdst; } // hours of daylight savings time
+  		int getHourDST() const { return ttme->tm_isdst; } // hours of daylight savings time
 
 
 		// operator-
@@ -78,3 +81,5 @@ class Time{
         time_t now;
         tm *ttme;
 };
+
+#endif

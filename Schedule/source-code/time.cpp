@@ -11,7 +11,6 @@
 
 Time::Time() {
     now = time(0);
-
     ttme = localtime(&now);
 }
 
@@ -25,9 +24,11 @@ Time::Time(const time_t time){
 }
 
 Time::Time(const struct tm * time){
-    now = mktime(time);
-
-    ttme = time;
+    cout<<"oi1" << endl;
+    *ttme = *time;
+    cout<<"oi2" << endl;
+    now = mktime(ttme);
+    cout<<"oi3" << endl;
 
 }
 
@@ -40,7 +41,7 @@ Time::Time(const struct tm * time){
 Time::Time(const Time& t) {
     now = t.now;
     
-    ttme = t->ttme;
+    ttme = t.ttme;
 }
 
 // copy assignment
@@ -55,7 +56,7 @@ Time& Time::operator=(const Time& rhs){
     
     now = rhs.now;
 
-    ttme = rhs->ttme;
+    ttme = rhs.ttme;
 
     return *this;
 }
@@ -91,6 +92,6 @@ int operator>(const Time& t1, const Time& t2){
     return (t1-t2) > 0;
 }
 
-int operator==(const Time& t1, const Time& s2){
+int operator==(const Time& t1, const Time& t2){
     return (t1-t2) == 0;
 }

@@ -5,7 +5,7 @@
 
 # We’ll use gcc for C compilation and g++ for C++ compilation
 
-CC  = gcc
+CC  = g++
 CXX = g++
 
 # Let’s leave a place holder for additional include directories
@@ -40,7 +40,7 @@ LDLIBS =
 # Also note that make assumes that main depends on main.o,
 # so we can omit it if we want to.
 
-main: main.o myadd.o
+testtime: testtime.o time.o
 
 # main.o depends not only on main.c, but also on myadd.h because
 # main.c includes myadd.h.  main.o will get recompiled if either
@@ -55,11 +55,11 @@ main: main.o myadd.o
 #     $(CC) -c $(CFLAGS) <the-.c-file>
 #
 
-main.o: main.c myadd.h
+testtime.o: time.h
 
 # And myadd.o depends on myadd.c and myadd.h.
 
-myadd.o: myadd.c myadd.h
+time.o: time.cpp time.h
 
 # Always provide the "clean" target that removes intermediate files.
 # What you remove depend on your choice of coding tools
@@ -70,10 +70,10 @@ myadd.o: myadd.c myadd.h
 
 .PHONY: clean
 clean:
-	rm -f *.o a.out core main
+	rm -f *.o a.out core testtime
 
 # "all" target is useful if your Makefile builds multiple programs.
 # Here we’ll have it first do "clean", and rebuild the main target.
 
 .PHONY: all
-all: clean main
+all: clean testtime
