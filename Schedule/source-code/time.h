@@ -20,7 +20,7 @@ class Time{
       // constructor
       Time(const time_t time);
 
-      Time(const struct tm * time);
+      Time(struct tm * time);
 
       // destructor
       //˜Time();
@@ -41,9 +41,9 @@ class Time{
   
   		int getDay() const { return ttme->tm_mday; }      // day of month from 1 to 31
 
-  		int getMonth() const { return ttme->tm_mon; }     // month of year from 0 to 11
+  		int getMonth() const { return ttme->tm_mon + 1; }     // month of year from 0 to 11
 
-  		int getYear() const { return ttme->tm_year; }     // year since 1900
+  		int getYear() const { return ttme->tm_year + 1900; }     // year since 1900
 
   		int getWeekDay() const { return ttme->tm_wday; }  // days since sunday
 

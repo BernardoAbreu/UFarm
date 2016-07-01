@@ -8,26 +8,21 @@ using namespace std;
 
 int main(){
 
-	cout << "Hello" << endl;
 	Time t1;
 
 	sleep(1);
 
-	cout << "Hello2" << endl;
 	time_t now = time(0);
-	cout << "Hello3" << endl;
 
 	tm *ltm = localtime(&now);
-	cout << "Hello4" << endl;
+   	
    	Time t2(now);
-   	cout << "Hello5" << endl;
    	Time t3(ltm);
-   	cout << "Hello6" << endl;
 
    	if (t2 == t3){
    		cout << "ok" << endl;
    	}
-   	cout << "Hello7" << endl;
+  
 
 	// print various components of tm structure.
 	cout << "Year: " << t1.getYear() <<endl;

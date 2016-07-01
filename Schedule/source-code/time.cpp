@@ -23,13 +23,9 @@ Time::Time(const time_t time){
 
 }
 
-Time::Time(const struct tm * time){
-    cout<<"oi1" << endl;
-    *ttme = *time;
-    cout<<"oi2" << endl;
-    now = mktime(ttme);
-    cout<<"oi3" << endl;
-
+Time::Time(struct tm * time){
+    now = mktime(time);
+    ttme = localtime(&now);
 }
 
 // destructor
