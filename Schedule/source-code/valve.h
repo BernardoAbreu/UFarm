@@ -37,11 +37,11 @@ class Valve{
     	bool getValveState() const { return valveState; }
         
 
-    	void sendState(bool st) {};
+    	int sendState(bool);
     	
-    	bool readState() {};
+    	bool readState();
 		
-		bool checkState() {};
+		bool checkState();
 		
 	
 	private:
@@ -50,6 +50,6 @@ class Valve{
         bool state;
         int code;
         bool valveState;
-}
+};
 
 #endif

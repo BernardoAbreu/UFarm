@@ -46,10 +46,11 @@ Valve& Valve::operator=(const Valve& v){
 
 int Valve::sendState(bool st) {
 	unsigned long cd = code*10 + st;
-	int error = sendcode(cd);
+	//int error = sendcode(cd);
+	int error = 0;
 
 	if (!error){
-		this->setState(bool st);
+		this->setState(st);
 		return 0;
 	}
 	else{
@@ -62,7 +63,8 @@ int Valve::sendState(bool st) {
 bool Valve::readState() {
 	unsigned long new_code;
 
-	new_code = readcode();
+	//new_code = readcode();
+	new_code = 100110;
 
 	//TODO
 	/***********************/

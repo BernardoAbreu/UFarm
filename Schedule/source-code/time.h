@@ -11,28 +11,28 @@ class Time{
 
     public:
 
-        // default constructor
-        Time();
+      // default constructor
+      Time();
 
-        // constructor
-        Time(const time_t time);
+      // constructor
+      Time(const time_t time);
 
-		Time(const struct tm * time){
+      Time(const struct tm * time){
 
-        // destructor
-        //˜Time();
+      // destructor
+      //˜Time();
 
-        // copy constructor
-        Time(const Time& t);
+      // copy constructor
+      Time(const Time& t);
 
-        // copy assignment
-        Time& operator=(const Time& v);
+      // copy assignment
+      Time& operator=(const Time& v);
 
-        Time getCurrentTime();
-        
-        int getSecond() const { return tm_sec; }    // seconds of minutes from 0 to 61
+      Time getCurrentTime();
 
-        int getMinute() const { return tm_min; }    // minutes of hour from 0 to 59}
+      int getSecond() const { return tm_sec; }    // seconds of minutes from 0 to 61
+
+      int getMinute() const { return tm_min; }    // minutes of hour from 0 to 59}
   
   		int getHour() const { return  tm_hour; }    // hours of day from 0 to 24
   
@@ -77,4 +77,4 @@ class Time{
 
         time_t now;
         tm *ttme;
-}
+};
