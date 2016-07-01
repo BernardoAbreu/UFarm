@@ -16,5 +16,7 @@ int main(){
 	v1.setState(0);
 
 	cout << "Valve " << v1.getNumber() << " " << ((v1.getState()) ? "open" : "closed") << endl;
-        
+ 
+
+ 	return 0;       
 }

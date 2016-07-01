@@ -16,9 +16,9 @@
         Reset();
 
         // constructor
-        Reset(const Time*);
+        Reset(const Time&);
 
-        Reset(int,int,state);
+        Reset(int,int,int);
 
         Reset(int,int);
 
@@ -39,11 +39,11 @@
   		bool getState() const { return state; }
 
 
-        int setMinute(int m) const { minute = m; }    // minutes of hour from 0 to 59}
+        void setMinute(int m) { minute = m; }    // minutes of hour from 0 to 59}
   
-  		int setHour(int h) const { hour = h; }    // hours of day from 0 to 24
+  		void setHour(int h) { hour = h; }    // hours of day from 0 to 24
   
-  		bool setState(bool s) const { state = s; }
+  		void setState(bool s) { state = s; }
 
 
 		// operator-
@@ -75,6 +75,6 @@
 		int hour;
 		int minute;
 		bool state;
-}
+};
 
 #endif

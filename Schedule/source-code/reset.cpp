@@ -12,9 +12,9 @@ Reset::Reset() {
 }
 
 // constructor
-Reset::Reset(const Time* time){
-    hour = time->getHour();
-    minute = time->getMinute();
+Reset::Reset(const Time& time){
+    hour = time.getHour();
+    minute = time.getMinute();
     state = false;
 }
 
@@ -52,9 +52,9 @@ Reset& Reset::operator=(const Reset& rhs){
     }
 
     // now copy from rhs
-    hour = r.hour;
-    minute = r.minute;
-    state = r.state;
+    hour = rhs.hour;
+    minute = rhs.minute;
+    state = rhs.state;
 
     return *this;
 }

@@ -53,5 +53,6 @@ int main(){
 
 	cout << "Seconds from the beginning: " << (t5-t1) << endl;
 	
+	return 0;
 
 }

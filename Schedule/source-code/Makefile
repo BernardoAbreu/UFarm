@@ -40,7 +40,7 @@ LDLIBS =
 # Also note that make assumes that main depends on main.o,
 # so we can omit it if we want to.
 
-testtime: testtime.o time.o
+testreset: testreset.o reset.o time.o
 
 # main.o depends not only on main.c, but also on myadd.h because
 # main.c includes myadd.h.  main.o will get recompiled if either
@@ -55,11 +55,11 @@ testtime: testtime.o time.o
 #     $(CC) -c $(CFLAGS) <the-.c-file>
 #
 
-testtime.o: time.h
+testreset.o: reset.h time.h
 
 # And myadd.o depends on myadd.c and myadd.h.
 
-time.o: time.cpp time.h
+reset.o: reset.cpp reset.h time.h
 
 # Always provide the "clean" target that removes intermediate files.
 # What you remove depend on your choice of coding tools
@@ -70,10 +70,10 @@ time.o: time.cpp time.h
 
 .PHONY: clean
 clean:
-	rm -f *.o a.out core testtime
+	rm -f *.o a.out core testreset
 
 # "all" target is useful if your Makefile builds multiple programs.
 # Here we’ll have it first do "clean", and rebuild the main target.
 
 .PHONY: all
-all: clean testtime
+all: clean testreset
