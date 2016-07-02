@@ -1,10 +1,3 @@
-# Written by Jae Woo Lee
-# This Makefile should be used as a template for future Makefiles.
-# It’s heavily commented, so hopefully you can understand what each
-# line does.
-
-# We’ll use gcc for C compilation and g++ for C++ compilation
-
 CC  = g++
 CXX = g++
 
@@ -28,32 +21,9 @@ LDFLAGS = -g
 
 LDLIBS =
 
-# The 1st target gets built when you type "make".
-# It’s usually your executable.  ("main" in this case.)
-#
-# Note that we did not specify the linking rule.
-#
-# Instead, we rely on one of make’s implicit rules:
-#
-#     $(CC) $(LDFLAGS) <all-dependent-.o-files> $(LDLIBS)
-#
-# Also note that make assumes that main depends on main.o,
-# so we can omit it if we want to.
 
 schedule_system: schedule_system.o schedule.o valve_info.o reset.o time.o valve.o
 
-# main.o depends not only on main.c, but also on myadd.h because
-# main.c includes myadd.h.  main.o will get recompiled if either
-# main.c or myadd.h get modified.
-#
-# make already knows main.o depends on main.c, so we can omit main.c
-# in the dependency list if we want to.
-#
-# make uses the following implicit rule to compile a .c file into a .o
-# file:
-#
-#     $(CC) -c $(CFLAGS) <the-.c-file>
-#
 
 schedule_system.o: schedule.h
 
@@ -61,20 +31,12 @@ schedule.o: schedule.h valve_info.h
 
 valve_info.o:  valve_info.h valve.h reset.h time.h
 
-# And myadd.o depends on myadd.c and myadd.h.
-
 reset.o: reset.h time.h
 
 time.o: time.h
 
 valve.o: valve.h
 
-# Always provide the "clean" target that removes intermediate files.
-# What you remove depend on your choice of coding tools
-# (different editors generate different backup files for example).
-#
-# And the "clean" target is not a file name, so we tell make that
-# it’s a "phony" target.
 
 .PHONY: clean
 clean:
