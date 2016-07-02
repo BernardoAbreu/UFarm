@@ -9,6 +9,7 @@ Reset::Reset() {
     hour = 0;
     minute = 0;
     state = false;
+    available = false;
 }
 
 // constructor
@@ -16,18 +17,21 @@ Reset::Reset(const Time& time){
     hour = time.getHour();
     minute = time.getMinute();
     state = false;
+    available = true;
 }
 
 Reset::Reset(int h, int m, int s){
     hour = h;
     minute = m;
     state = s;
+    available = true;
 }
 
 Reset::Reset(int h, int m){
     hour = h;
     minute = m;
     state = false;
+    available = true;
 }
 
 
@@ -48,7 +52,7 @@ Reset::Reset(const Reset& r) {
 Reset& Reset::operator=(const Reset& rhs){
 
     if (this == &rhs) {
-    return *this;
+        return *this;
     }
 
     // now copy from rhs

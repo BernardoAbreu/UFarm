@@ -1,12 +1,21 @@
-#ifndef __VALVE_H__
-#define __VALVE_H__
+/*
+ * schedule.h
+ */
 
-#include "valve.h"
-#include "reset.h"
-#include "time.h"
+#ifndef __SCHEDULE_H__
+#define __SCHEDULE_H__
+
+
+#include <map>
+#include <string>
+#include "valve_info.h"
 
 using namespace std;
 
+
+typedef map<int, Valve_info> valve_map;
+
+typedef map<int, Valve_info>::iterator iter;
 
 class Schedule{
 
@@ -16,38 +25,41 @@ class Schedule{
         Schedule();
 
         // constructor
-        Schedule(int);
+        //Schedule(int);
 
         // destructor
-        ˜Schedule();
+        ~Schedule();
 
         // copy constructor
-        Schedule(const Valve& v);
+        Schedule(const Schedule& v);
 
         // copy assignment
-        Schedule& operator=(const Valve& v);
+        Schedule& operator=(const Schedule& v);
         
-        void addValve(valve_info);
+        void addValve(Valve_info);
 
         //void addValve(Valve, int, int, Reset, int);
 
 
-        void removeValve(Valve);
+        void removeValve(int);
 
 
         void monitorValves();
 
 
-        void setOutFile(string out) { outfile = out; };
+        void setOutFile(string out) { outfile = out; }
+
+        Valve_info& getValve_Info(int i) { return valves->find(i)->second; }
         
         
-        void getOutFile() const { return outfile; }
+        string getOutFile() const { return outfile; }
         
     
     private:
 
+        int last_minute;
         string outfile;
-        ValveCluster valves;
-}
+        valve_map *valves;
+};
 
 #endif

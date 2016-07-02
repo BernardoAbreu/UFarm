@@ -1,4 +1,6 @@
+#include <iostream>
 #include "valve.h"
+
 
 
 // default constructor
@@ -18,7 +20,7 @@ Valve::Valve(int num){
 }
 
 // destructor
-//˜Valve();
+//Valve::~Valve(){}
 
 // copy constructor
 Valve::Valve(const Valve& v){
@@ -42,6 +44,15 @@ Valve& Valve::operator=(const Valve& v){
 	return *this;
 }
 
+
+void Valve::setState(bool st) {
+	state = st;
+}
+
+
+void Valve::setValveState(bool st) {
+	valveState = st; 
+}
 
 
 int Valve::sendState(bool st) {

@@ -23,7 +23,7 @@
         Reset(int,int);
 
         // destructor
-        //˜Reset();
+        //~Reset();
 
         // copy constructor
         Reset(const Reset& t);
@@ -38,12 +38,16 @@
   
   		bool getState() const { return state; }
 
+  		bool getAvailable() const { return available; }
+
 
         void setMinute(int m) { minute = m; }    // minutes of hour from 0 to 59}
   
   		void setHour(int h) { hour = h; }    // hours of day from 0 to 24
   
   		void setState(bool s) { state = s; }
+
+  		void setAvailable(bool a) { available = a; }
 
 
 		// operator-
@@ -75,6 +79,7 @@
 		int hour;
 		int minute;
 		bool state;
+		bool available;
 };
 
 #endif

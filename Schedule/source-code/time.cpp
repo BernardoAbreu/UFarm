@@ -17,6 +17,7 @@ Time::Time() {
 // constructor
 
 Time::Time(const time_t time){
+
     now = time;
 
     ttme = localtime(&now);
@@ -24,6 +25,7 @@ Time::Time(const time_t time){
 }
 
 Time::Time(struct tm * time){
+
     now = mktime(time);
     ttme = localtime(&now);
 }
@@ -43,7 +45,6 @@ Time::Time(const Time& t) {
 // copy assignment
 
 Time& Time::operator=(const Time& rhs){
-
     if (this == &rhs) {
 	return *this;
     }

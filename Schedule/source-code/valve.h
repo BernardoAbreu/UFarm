@@ -14,7 +14,7 @@ class Valve{
 		Valve(int);
 
 		// destructor
-		//˜Valve();
+		//~Valve();
 
 		// copy constructor
 		Valve(const Valve& v);
@@ -25,13 +25,13 @@ class Valve{
 
 		int getNumber() const { return number; }
         
-        void setState(bool st) { state = st; }
+        void setState(bool st);
         
     
     	bool getState() const { return state; }
         
         
-    	void setValveState(bool st) { valveState = st; }
+    	void setValveState(bool st);
         
         
     	bool getValveState() const { return valveState; }

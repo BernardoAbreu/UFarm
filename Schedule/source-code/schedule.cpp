@@ -1,30 +1,50 @@
-#include <string>
 #include <iostream>
-#include <cstdlib>
-#include <iostream>
+#include <fstream>
+#include <unistd.h>
 #include "schedule.h"
 
 Schedule::Schedule(){
-    last_minute = Time.getCurrentTime().getMinute();
+    Time t;
+    last_minute = t.getMinute();
 
     outfile = "schedule_info.txt";
+    valves = new valve_map();
 }
 
 // constructor
-Schedule::Schedule(int);
+//Schedule::Schedule(int){}
 
 // destructor
-Schedule::˜Schedule();
+Schedule::~Schedule(){
+    delete valves;
+}
 
 // copy constructor
-Schedule::Schedule(const Valve& v);
+Schedule::Schedule(const Schedule& s){
+    last_minute = s.last_minute;
+    outfile = s.outfile;
+    valves = new valve_map(*s.valves);
+}
 
 // copy assignment
-Schedule& Schedule::operator=(const Valve& v);
+Schedule& Schedule::operator=(const Schedule& s){
+    if (this == &s) {
+        return *this;
+    }
+
+    delete valves;
+    // now copy from s
+    last_minute = s.last_minute;
+    outfile = s.outfile;
+    valves = new valve_map(*s.valves);
+
+    return *this;
+}
 
 
-void Schedule::addValve(valve_info info){
-        valves[valve.getNumber()] = info;
+//TODO
+void Schedule::addValve(Valve_info info){
+    valves->insert(make_pair(info.getValve().getNumber(), info));
 }
 
 //void addValve(Valve, int, int, Reset, int){
@@ -38,109 +58,131 @@ void Schedule::addValve(valve_info info){
 
 //TODO
 void Schedule::removeValve(int num){
-    valves.remove(num);
+    valves->erase (num); 
 }
 
 
 
 void Schedule::monitorValves(){
         Time time;
-        time.getCurrentTime();
 
         if (last_minute != time.getMinute()){
             bool checknow = false;
             
-            for (key, v in self.valves.iteritems()){
-                //passed_time = (time.minute + time.hour*60) - (v.last_time.hour*60 + v.last_time.minute)
+            ofstream out;
+            out.open(outfile.c_str(), ios::app);
+
+            for(iter it = valves->begin(); it != valves->end(); it++ ){
+                Valve_info& v = it->second;
+                //passed_time = (time.minute + time.hour*60) - (v.getLastTime().hour*60 + v.getLastTime().minute)
                 
-                passed_time = time - v.last_time;
-                passed_check = time - v.last_check;
+
+                double passed_time = time - v.getLastTime();
+                double passed_check = time - v.getLastCheck();
+
                 //p_c_time = passed_check.days*24*60 + passed_check.seconds/60.0                            
                 
                                 
-                if (v.reset == time ){
-                    v.valve.setState(v.reset.getState());
-                    v.last_time = time;
+                if ((v.getReset() == time ) && v.getReset().getAvailable()){
+                    v.getValve().setState(v.getReset().getState());
+                    v.setLastTime(time);
 
-                    with open(self.outfile, "a") as myfile:
-                        myfile.write('Valve {} {}'.format(v.valve.getNumber(),'open' if v.valve.getState() else 'closed'))
+                    //with open(self.outfile, "a") as myfile:
+                        //myfile.write('Valve {} {}'.format(v.getValve().getNumber(),'open' if v.getValve().getState() else 'closed'))
                     
-                    cout << "Valve " << v.valve.getNumber() << " " << ((v.valve.getState()) ? "open" : "closed");
+                    out << "Valve " << v.getValve().getNumber() << " " << ((v.getValve().getState()) ? "open" : "closed") << endl;
+                    cout << "Valve " << v.getValve().getNumber() << " " << ((v.getValve().getState()) ? "open" : "closed") << endl;
                 }
                 else{
-                    if (passed_check.getSecond()/60.0 >= v.check_time){
-                    //if (p_c_time >= v.check_time);
-                        v.last_check = time;
+                    if (passed_check/60.0 >= v.getCheckTime()){
+                    //if (p_c_time >= v.getCheckTime());
+                        v.setLastCheck(time);
                         
-                        cout << "Checking valve " << v.valve.getNumber();
+                        out << "Checking valve " << v.getValve().getNumber();
+                        cout << "Checking valve " << v.getValve().getNumber();
 
-                        outstr = 'Checking valve ' + str( v.valve.getNumber() ) + '\n'
+                        //outstr = 'Checking valve ' + str( v.getValve().getNumber() ) + '\n'
                                 
-                        state_ok = v.valve.readState();
+                        bool state_ok = v.getValve().readState();
                         
                         if (state_ok){
-                            outstr += 'Valve {} ok: {}'.format(v.valve.getNumber(), 'open' if v.valve.getState() else 'closed')
+                            //outstr += 'Valve {} ok: {}'.format(v.getValve().getNumber(), 'open' if v.getValve().getState() else 'closed')
 
-                            cout << "Valve " << v.valve.getNumber() << " ok:" << ((v.valve.getState()) ? "open" : "closed");
+                            out << "Valve " << v.getValve().getNumber() << " ok:" << ((v.getValve().getState()) ? "open" : "closed");
+                            cout << "Valve " << v.getValve().getNumber() << " ok:" << ((v.getValve().getState()) ? "open" : "closed");
                         }
 
                         else{
-                            outstr += 'Error on valve {}: Currently {}. Should be {}'.format(v.valve.getNumber(),'open' if v.valve.getValveState() else 'closed','open'if v.valve.getState() else 'closed')
+                            //outstr += 'Error on valve {}: Currently {}. Should be {}'.format(v.getValve().getNumber(),'open' if v.getValve().getValveState() else 'closed','open'if v.getValve().getState() else 'closed')
                             
 
-                            cout << "Error on valve " << v.valve.getNumber() 
-                            << ". Currently " << ((v.valve.getValveState()) ? "open" : "closed") 
-                            << ". Should be " << ((v.valve.getState()) ? "open" : "closed");
+                            out << "Error on valve " << v.getValve().getNumber() 
+                            << ". Currently " << ((v.getValve().getValveState()) ? "open" : "closed") 
+                            << ". Should be " << ((v.getValve().getState()) ? "open" : "closed");
+
+                            cout << "Error on valve " << v.getValve().getNumber() 
+                            << ". Currently " << ((v.getValve().getValveState()) ? "open" : "closed") 
+                            << ". Should be " << ((v.getValve().getState()) ? "open" : "closed");
                         }
 
-                        appendToFile(outfile, outstr);
+                        out << endl;
+                        cout << endl;
+
+                        //appendToFile(outfile, outstr);
 
                     }      
-                    if (v.valve.getState()){
-                        if (passed_time.getSecond()/60.0 >= v.open){
-                        //if (passed_time >= v.open){
-                            //v.valves.sendState = False
-                            v.valve.sendState(false);
-                            v.last_time = time;
+                    if (v.getValve().getState()){
+                        if (passed_time/60.0 >= v.getOpen()){
+                        //if (passed_time >= v.getOpen()){
+                            //v.getValve()s.sendState = False
+                            v.getValve().sendState(false);
+                            v.setLastTime(time);
                             
                             if (!checknow){
-                                with open(self.outfile, "a") as myfile:
-                                    myfile.write('\n'+str(time)+'\n')
-
-                                cout << time;
+                                //with open(self.outfile, "a") as myfile:
+                                    //myfile.write('\n'+str(time)+'\n')
+                                
+                                out << "\n" << time;
+                                cout << "\n" << time;
                                 checknow = true;
                             }
 
-                            cout << "Valve " << v.valve.getNumber() << ((v.valve.getState()) ? "open" : "closed");
-                                
-                            with open(self.outfile, "a") as myfile:
-                                myfile.write('Valve {} {}\n'.format(v.valve.getNumber(),'open' if v.valve.getState() else 'closed'))
+                            out << "Valve " << v.getValve().getNumber() << " " << ((v.getValve().getState()) ? "open" : "closed") << endl;
+                            cout << "Valve " << v.getValve().getNumber() << " " << ((v.getValve().getState()) ? "open" : "closed") << endl;
+                            
+                            //with open(self.outfile, "a") as myfile:
+                                //myfile.write('Valve {} {}\n'.format(v.getValve().getNumber(),'open' if v.getValve().getState() else 'closed'))
                         }
                     }
                     else{     
-                        if ( passed_time.getSecond() / 60.0 >= v.closed ) {
-                        //if (passed_time >= v.closed){
-                            v.valve.sendState(true);
-                            v.last_time = time;
+                        if ( passed_time / 60.0 >= v.getClosed() ) {
+                        //if (passed_time >= v.getClosed()){
+                            v.getValve().sendState(true);
+                            v.setLastTime(time);
                            
                             if (!checknow){
-                                with open(self.outfile, "a") as myfile:
-                                    myfile.write('\n'+str(time)+'\n')
+                                //with open(self.outfile, "a") as myfile:
+                                    //myfile.write('\n'+str(time)+'\n')
                                 
-                                cout << time;
+                                out << "\n" << time;
+                                cout << "\n" << time;
                                 checknow = true;
                             }
 
-                            cout "Valve " << v.valve.getNumber() << ((v.valve.getState()) ? "open" : "closed");
-                                
-                            with open(self.outfile, "a") as myfile:
-                                myfile.write('Valve {} {}\n'.format(v.valve.getNumber(),'open' if v.valve.getState() else 'closed'))
+                            out << "Valve " << v.getValve().getNumber() << " " << ((v.getValve().getState()) ? "open" : "closed") << endl;
+                            cout << "Valve " << v.getValve().getNumber() << " " << ((v.getValve().getState()) ? "open" : "closed") << endl;
+                            
+                            //with open(self.outfile, "a") as myfile:
+                                //myfile.write('Valve {} {}\n'.format(v.getValve().getNumber(),'open' if v.getValve().getState() else 'closed'))
                         }
                     }
                 }
             }
+            out.close();
         }
+        
     
-        last_minute = time.getminute();
-        sleep(50)
+        last_minute = time.getMinute();
+        sleep(60);
+        
 }
