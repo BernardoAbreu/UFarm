@@ -12,8 +12,6 @@ int main(){
 
     sch.setOutFile("info.txt");
     
-    //with open(sch.getOutFile(), "a") as myfile:
-        //myfile.write('Started running:\n{}\n'.format(datetime.now()))
     Time t;
     cout << "Started running: " << t << endl;
 
@@ -25,8 +23,7 @@ int main(){
 
     out.close();
     
-    //while (true){
-    for(int i = 0; i < 10; i++){
+    while (true){
         sch.monitorValves();
     }
 

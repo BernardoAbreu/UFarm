@@ -24,9 +24,6 @@ class Schedule{
         // default constructor
         Schedule();
 
-        // constructor
-        //Schedule(int);
-
         // destructor
         ~Schedule();
 
@@ -38,7 +35,6 @@ class Schedule{
         
         void addValve(Valve_info);
 
-        //void addValve(Valve, int, int, Reset, int);
 
 
         void removeValve(int);

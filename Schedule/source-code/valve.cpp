@@ -57,7 +57,7 @@ void Valve::setValveState(bool st) {
 
 int Valve::sendState(bool st) {
 	unsigned long cd = code*10 + st;
-	//int error = sendcode(cd);
+
 	int error = 0;
 
 	if (!error){
