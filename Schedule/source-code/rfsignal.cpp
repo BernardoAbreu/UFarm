@@ -1,3 +1,28 @@
+#include <iostream>
+#include <unistd.h>
+#include <RF24/RF24.h>
+
+void setup(const uint8_t *pipe0, const uint8_t *pipe1){
+
+  	// Setup and configure rf radio
+  	radio.begin();
+
+	// optionally, increase the delay between retries & # of retries
+  	radio.setRetries(15,15);
+  	// Dump the configuration of the rf unit for debugging
+  	radio.printDetails();
+
+	/***********************************/
+  	// This simple sketch opens two pipes for these two nodes to communicate
+  	// back and forth.
+
+	radio.openWritingPipe(pipe1);
+	radio.openReadingPipe(1,pipe0);
+
+	radio.startListening();
+}
+
+
 void sendcode(unsigned long code){
 	int error = 0;
 

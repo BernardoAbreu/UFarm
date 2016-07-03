@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include "valve_info.h"
+#include "rfsignal.h"
 
 using namespace std;
 

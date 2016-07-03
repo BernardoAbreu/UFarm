@@ -1,10 +1,17 @@
 #include <fstream>
 #include "schedule.h"
 
+
 using namespace std;
 
+const uint8_t pipes[][6] = {"1Node","2Node"};
+
 int main(){
-	
+
+
+    setup(pipe[0], pipe[1]);
+
+
     Schedule sch;
 
     sch.addValve( Valve_info( Valve(0), 1, 2, Reset(16,51,true) ) );
