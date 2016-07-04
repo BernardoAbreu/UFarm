@@ -1,8 +1,7 @@
-#include <iostream>
 #include "valve.h"
 
 
-
+/******************************************************************************/
 // default constructor
 Valve::Valve(){
 	number = 0;
@@ -10,7 +9,10 @@ Valve::Valve(){
 	code = 100;
     valveState = false;
 }
+/******************************************************************************/
 
+
+/******************************************************************************/
 // constructor
 Valve::Valve(int num){
 	number = num;
@@ -18,10 +20,10 @@ Valve::Valve(int num){
 	code = 100 + num;
     valveState = false;
 }
+/******************************************************************************/
 
-// destructor
-//Valve::~Valve(){}
 
+/******************************************************************************/
 // copy constructor
 Valve::Valve(const Valve& v){
 	number = v.number;
@@ -29,7 +31,10 @@ Valve::Valve(const Valve& v){
 	code = v.code;
     valveState = v.valveState;
 }
+/******************************************************************************/
 
+
+/******************************************************************************/
 // copy assignment
 Valve& Valve::operator=(const Valve& v){
 	if (this == &v) {
@@ -43,18 +48,11 @@ Valve& Valve::operator=(const Valve& v){
 	
 	return *this;
 }
+/******************************************************************************/
 
 
-void Valve::setState(bool st) {
-	state = st;
-}
-
-
-void Valve::setValveState(bool st) {
-	valveState = st; 
-}
-
-
+/******************************************************************************/
+//TODO
 int Valve::sendState(bool st) {
 	unsigned long cd = code*10 + st;
 
@@ -68,8 +66,11 @@ int Valve::sendState(bool st) {
 		return 1;
 	}
 	
-};
+}
+/******************************************************************************/
 
+
+/******************************************************************************/
 //TODO
 bool Valve::readState() {
 	unsigned long new_code;
@@ -86,9 +87,12 @@ bool Valve::readState() {
 
 	return this->getValveState();
 }
+/******************************************************************************/
 
+
+/******************************************************************************/
 bool Valve::checkState() {
 	this->readState();
 	return (this->getValveState() == this->getState());
 }
-		
+/******************************************************************************/
