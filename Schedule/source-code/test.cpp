@@ -21,13 +21,13 @@ int main(int argc, char** argv){
 	
 	cout << "Starting Test\n";
 
-	setup(pipes[0],pipes[1]);
+	setup(radio, pipes[0],pipes[1]);
 
 
 	do{	
 		cin >> code;
 
-		sendcode(code);
+		sendcode(radio, code);
 		sleep(1);
 
 	} while(code != 0)

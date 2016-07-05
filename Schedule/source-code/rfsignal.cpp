@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <RF24/RF24.h>
 
-void setup(const uint8_t *pipe0, const uint8_t *pipe1){
+void setup(RF24& radio, const uint8_t *pipe0, const uint8_t *pipe1){
 
   	// Setup and configure rf radio
   	radio.begin();
@@ -23,7 +23,7 @@ void setup(const uint8_t *pipe0, const uint8_t *pipe1){
 }
 
 
-void sendcode(unsigned long code){
+void sendcode(RF24& radio, unsigned long code){
 	int error = 0;
 
 	// First, stop listening so we can talk.
@@ -75,7 +75,7 @@ void sendcode(unsigned long code){
 }
 
 
-unsigned long readcode(){
+unsigned long readcode(RF24& radio){
 	// if there is data ready
 	if ( radio.available() ) {
 		// Dump the payloads until we've gotten everything

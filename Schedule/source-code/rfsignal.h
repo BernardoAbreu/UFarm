@@ -7,10 +7,10 @@
 #include <RF24/RF24.h>
 
 
-void setup(const uint8_t*, const uint8_t*);
+void setup(RF24& radio, const uint8_t*, const uint8_t*);
 
-void sendcode(unsigned long);
+void sendcode(RF24& radio, unsigned long);
 
-unsigned long readcode();
+unsigned long readcode(RF24& radio);
 
 #endif
