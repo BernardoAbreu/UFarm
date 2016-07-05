@@ -1,6 +1,5 @@
 #include <fstream>
 #include "schedule.h"
-#include "rfsignal.h"
 
 using namespace std;
 
@@ -31,6 +30,7 @@ int main(){
     out.close();
     
     while (true){
+        //sch.monitorValves();
         sch.monitorValves(radio);
     }
 

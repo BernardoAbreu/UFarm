@@ -9,7 +9,7 @@
 #include <map>
 #include <string>
 #include "valve_info.h"
-#include "rfsignal.h"
+
 
 using namespace std;
 
@@ -42,6 +42,7 @@ class Schedule{
 
 
         void monitorValves(RF24&);
+        //void monitorValves();
 
 
         void setOutFile(string out) { outfile = out; }

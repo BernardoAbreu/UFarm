@@ -1,6 +1,7 @@
 #ifndef __VALVE_H__
 #define __VALVE_H__
 
+#include <iostream>
 #include "rfsignal.h"
 
 using namespace std;
@@ -103,6 +104,7 @@ class Valve{
     	 *              than 0 if there is.
     	 */
     	int sendState(RF24&, bool);
+    	//int sendState(bool);
 
 
     	/**
@@ -111,6 +113,7 @@ class Valve{
     	 * @return The actual state of the valve
     	 */
     	bool readState(RF24&);
+    	//bool readState();
 
 
 		/**
@@ -119,6 +122,7 @@ class Valve{
 		 * @return 1 if the state is correct, 0 if not.
 		 */
 		bool checkState(RF24&);
+		//bool checkState();
 		
 	
 	private:

@@ -53,10 +53,13 @@ Valve& Valve::operator=(const Valve& v){
 
 /******************************************************************************/
 //TODO
-int Valve::sendState(RF24& radio, bool st) {
+int Valve::sendState(bool st) {
+//int Valve::sendState(RF24& radio, bool st) {
 	unsigned long cd = code*10 + st;
-
+	cout<< "\ncd: " << cd << endl;
 	int error = sendcode(radio, cd);
+	//int error = 0;
+	cd << "error: " << error << endl;
 
 	if (!error){
 		this->setState(st);
@@ -72,6 +75,7 @@ int Valve::sendState(RF24& radio, bool st) {
 
 /******************************************************************************/
 //TODO
+//bool Valve::readState() {
 bool Valve::readState(RF24& radio) {
 	unsigned long new_code;
 
@@ -91,7 +95,9 @@ bool Valve::readState(RF24& radio) {
 
 
 /******************************************************************************/
+//bool Valve::checkState() {
 bool Valve::checkState(RF24& radio) {
+	//this->readState();
 	this->readState(radio);
 	return (this->getValveState() == this->getState());
 }
