@@ -22,7 +22,7 @@ LDFLAGS = -g
 LDLIBS = -lrf24
 
 
-schedule_system: schedule_system.o schedule.o valve_info.o reset.o time.o valve.o
+schedule_system: schedule_system.o schedule.o valve_info.o reset.o time.o valve.o rfsignal.o
 test: test.o rfsignal.o
 
 schedule_system.o: schedule.h
