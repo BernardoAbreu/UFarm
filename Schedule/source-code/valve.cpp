@@ -17,7 +17,7 @@ Valve::Valve(){
 Valve::Valve(int num){
 	number = num;
     state = false;
-	code = 1111 + num;
+	code = 11110 + num;
     valveState = false;
 }
 /******************************************************************************/
