@@ -66,7 +66,7 @@ int sendcode(RF24& radio, unsigned long code){
 		// Spew it
 		printf("Got response %lu, round-trip delay: %lu\n",got_code,millis()-got_code);
 
-		if(got_code != code){
+		if(got_code != ((code)%1000 + 202000)){
 			error = 1;
 		}
 	}
