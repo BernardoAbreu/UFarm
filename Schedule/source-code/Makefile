@@ -37,6 +37,8 @@ time.o: time.h
 
 valve.o: valve.h
 
+rfsignal.o: rfsignal.h
+
 
 .PHONY: clean
 clean:
