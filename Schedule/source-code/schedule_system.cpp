@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const uint8_t pipes[][6] = {"1Node","2Node"};
+const uint8_t pipe[][6] = {"1Node","2Node"};
 
 RF24 radio(22,0);
 
