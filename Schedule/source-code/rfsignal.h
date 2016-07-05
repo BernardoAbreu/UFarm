@@ -9,7 +9,7 @@
 
 void setup(RF24& radio, const uint8_t*, const uint8_t*);
 
-void sendcode(RF24& radio, unsigned long);
+int sendcode(RF24& radio, unsigned long);
 
 unsigned long readcode(RF24& radio);
 

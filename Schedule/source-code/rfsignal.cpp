@@ -23,7 +23,7 @@ void setup(RF24& radio, const uint8_t *pipe0, const uint8_t *pipe1){
 }
 
 
-void sendcode(RF24& radio, unsigned long code){
+int sendcode(RF24& radio, unsigned long code){
 	int error = 0;
 
 	// First, stop listening so we can talk.
@@ -76,10 +76,10 @@ void sendcode(RF24& radio, unsigned long code){
 
 
 unsigned long readcode(RF24& radio){
+	unsigned long got_code;
+
 	// if there is data ready
 	if ( radio.available() ) {
-		// Dump the payloads until we've gotten everything
-		unsigned long got_code;
 
 		// Fetch the payload, and see if this was the last one.
 		while(radio.available()){
