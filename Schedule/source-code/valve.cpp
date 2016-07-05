@@ -59,7 +59,7 @@ int Valve::sendState(RF24& radio, bool st) {
 	cout<< "\ncd: " << cd << endl;
 	int error = sendcode(radio, cd);
 	//int error = 0;
-	cd << "error: " << error << endl;
+	cout << "error: " << error << endl;
 
 	if (!error){
 		this->setState(st);
