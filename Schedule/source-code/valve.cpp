@@ -91,8 +91,8 @@ bool Valve::readState(RF24& radio) {
 
 
 /******************************************************************************/
-bool Valve::checkState() {
-	this->readState();
+bool Valve::checkState(RF24& radio) {
+	this->readState(radio);
 	return (this->getValveState() == this->getState());
 }
 /******************************************************************************/

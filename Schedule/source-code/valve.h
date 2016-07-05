@@ -118,7 +118,7 @@ class Valve{
 		 * 
 		 * @return 1 if the state is correct, 0 if not.
 		 */
-		bool checkState();
+		bool checkState(RF24&);
 		
 	
 	private:

@@ -85,9 +85,9 @@ void Schedule::monitorValves(RF24& radio){
                         out << "Checking valve " << v.getValve().getNumber();
                         cout << "Checking valve " << v.getValve().getNumber();
                                 
-                        bool state_ok = v.getValve().readState(radio);
+                        //bool state_ok = v.getValve().readState(radio);
                         
-                        if (state_ok){
+                        if (v.getValve().checkState(radio)){
 
                             out << "Valve " << v.getValve().getNumber() << " ok:" << ((v.getValve().getState()) ? "open" : "closed");
                             cout << "Valve " << v.getValve().getNumber() << " ok:" << ((v.getValve().getState()) ? "open" : "closed");
