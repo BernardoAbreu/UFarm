@@ -102,7 +102,7 @@ class Valve{
     	 * @return      An integer number. 0 if there is no error and different
     	 *              than 0 if there is.
     	 */
-    	int sendState(bool);
+    	int sendState(RF24&, bool);
 
 
     	/**
@@ -110,7 +110,7 @@ class Valve{
     	 * 
     	 * @return The actual state of the valve
     	 */
-    	bool readState();
+    	bool readState(RF24&);
 
 
 		/**
