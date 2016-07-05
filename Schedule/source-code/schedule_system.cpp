@@ -1,16 +1,17 @@
 #include <fstream>
 #include "schedule.h"
-
+#include "rfsignal.h"
 
 using namespace std;
 
 const uint8_t pipes[][6] = {"1Node","2Node"};
 
+RF24 radio(22,0);
+
 int main(){
 
 
-    setup(pipe[0], pipe[1]);
-
+    setup(radio, pipe[0], pipe[1]);
 
     Schedule sch;
 
