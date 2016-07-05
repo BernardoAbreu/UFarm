@@ -73,10 +73,10 @@ void setup() {
   // Set the PA Level low to prevent power supply related issues since this is a
   // getting_started sketch, and the likelihood of close proximity of the devices. RF24_PA_MAX is default.
   radio.setPALevel(RF24_PA_LOW);
-  pinMode(9, OUTPUT);
-  pinMode(10, OUTPUT);
-  pinMode(11, OUTPUT);
-  pinMode(12, OUTPUT);
+  pinMode(valve1, OUTPUT);
+  pinMode(valve2, OUTPUT);
+  pinMode(valve3, OUTPUT);
+  pinMode(valve4, OUTPUT);
   // Open a writing and reading pipe on each radio, with opposite addresses
   radio.openWritingPipe(addresses[0]);
   radio.openReadingPipe(1, addresses[1]);
