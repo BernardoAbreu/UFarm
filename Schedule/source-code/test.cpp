@@ -30,7 +30,7 @@ int main(int argc, char** argv){
 		sendcode(radio, code);
 		sleep(1);
 
-	} while(code != 0)
+	} while(code != 0);
 
   return 0;
 }
