@@ -56,10 +56,9 @@ Valve& Valve::operator=(const Valve& v){
 //int Valve::sendState(bool st) {
 int Valve::sendState(RF24& radio, bool st) {
 	unsigned long cd = code*10 + st;
-	cout<< "\ncd: " << cd << endl;
+	
 	int error = sendcode(radio, cd);
 	//int error = 0;
-	cout << "error: " << error << endl;
 
 	if (!error){
 		this->setState(st);
