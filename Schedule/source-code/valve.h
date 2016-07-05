@@ -28,6 +28,18 @@ class Valve{
 		 * Initializes the number of valve with the parameter received, both
 		 * the state and valveState as false and the code as 100.
 		 *
+		 * @param int The id number of the valve
+		 */
+		Valve(int);
+
+
+		/**
+		 * Constructor
+		 *
+		 * Creates a new instance of the valve.
+		 * Initializes the number of valve with the parameter received, both
+		 * the state and valveState as false and the code as 100.
+		 *
 		 * @param int The number of the arduino connected to the valve
 		 * @param int The number of valve to be created
 		 */
@@ -105,7 +117,6 @@ class Valve{
     	 *              than 0 if there is.
     	 */
     	int sendState(RF24&, bool);
-    	//int sendState(bool);
 
 
     	/**
@@ -114,7 +125,6 @@ class Valve{
     	 * @return The actual state of the valve
     	 */
     	bool readState(RF24&);
-    	//bool readState();
 
 
 		/**
@@ -123,7 +133,6 @@ class Valve{
 		 * @return 1 if the state is correct, 0 if not.
 		 */
 		bool checkState(RF24&);
-		//bool checkState();
 		
 	
 	private:

@@ -1,27 +1,40 @@
 #include "valve_info.h"
 
+/******************************************************************************/
+//Default Constructor
 Valve_info::Valve_info(){
     open = 0;
     closed = 0;
     check_time = 0;
 }
+/******************************************************************************/
 
+
+/******************************************************************************/
+//Constructor
 Valve_info::Valve_info(Valve v, int o, int c){
     valve = v;
     open = o;
     closed = c;
     check_time = 60;
 }
+/******************************************************************************/
 
+
+/******************************************************************************/
+//Constructor
 Valve_info::Valve_info(Valve v, int o, int c, Reset r){
     valve = v;
     open = o;
     closed = c;
     reset = r;
     check_time = 60;
-
 }
+/******************************************************************************/
 
+
+/******************************************************************************/
+//Constructor
 Valve_info::Valve_info(Valve v, int o, int c, Reset r, int ct){
     valve = v;
     open = o;
@@ -30,10 +43,10 @@ Valve_info::Valve_info(Valve v, int o, int c, Reset r, int ct){
     check_time = ct;
 
 }
+/******************************************************************************/
 
-// destructor
-//Valve_info::~Valve_info(){}
 
+/******************************************************************************/
 // copy constructor
 Valve_info::Valve_info(const Valve_info& v){
     valve = v.valve;
@@ -44,7 +57,10 @@ Valve_info::Valve_info(const Valve_info& v){
     check_time = v.check_time;
     last_check = v.last_check;
 }
+/******************************************************************************/
 
+
+/******************************************************************************/
 // copy assignment
 Valve_info& Valve_info::operator=(const Valve_info& v){
 
@@ -62,11 +78,16 @@ Valve_info& Valve_info::operator=(const Valve_info& v){
 
     return *this;
 }
+/******************************************************************************/
 
 
+/******************************************************************************/
 // put-to operator
 ostream& operator<<(ostream& os, const Valve_info& v){
 
-    os << "Valve: " << v.valve.getNumber() << ": open - " << v.open << ", closed - " << v.closed;
+    os << "Valve: " << v.valve.getNumber() << ": open - " << v.open 
+        << ", closed - " << v.closed;
+
     return os;
 }
+/******************************************************************************/

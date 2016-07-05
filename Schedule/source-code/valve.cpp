@@ -14,8 +14,19 @@ Valve::Valve(){
 
 /******************************************************************************/
 // constructor
-Valve::Valve(int cluster, int num){
+Valve::Valve(int num){
 	number = num;
+    state = false;
+	code = 11100 + cluster*10 + num;
+    valveState = false;
+}
+/******************************************************************************/
+
+
+/******************************************************************************/
+// constructor
+Valve::Valve(int cluster, int num){
+	number = 4*(cluster-1) + num;
     state = false;
 	code = 11100 + cluster*10 + num;
     valveState = false;
@@ -53,12 +64,10 @@ Valve& Valve::operator=(const Valve& v){
 
 /******************************************************************************/
 //TODO
-//int Valve::sendState(bool st) {
 int Valve::sendState(RF24& radio, bool st) {
 	unsigned long cd = code*10 + st;
 	
 	int error = sendcode(radio, cd);
-	//int error = 0;
 
 	if (!error){
 		this->setState(st);
@@ -74,12 +83,10 @@ int Valve::sendState(RF24& radio, bool st) {
 
 /******************************************************************************/
 //TODO
-//bool Valve::readState() {
 bool Valve::readState(RF24& radio) {
 	unsigned long new_code;
 
 	new_code = readcode(radio);
-	//new_code = 100110;
 
 	//TODO
 	/***********************/
@@ -94,9 +101,7 @@ bool Valve::readState(RF24& radio) {
 
 
 /******************************************************************************/
-//bool Valve::checkState() {
 bool Valve::checkState(RF24& radio) {
-	//this->readState();
 	this->readState(radio);
 	return (this->getValveState() == this->getState());
 }

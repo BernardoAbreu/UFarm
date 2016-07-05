@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <RF24/RF24.h>
 
+
+/******************************************************************************/
 void setup(RF24& radio, const uint8_t *pipe0, const uint8_t *pipe1){
 
   	// Setup and configure rf radio
@@ -21,8 +23,10 @@ void setup(RF24& radio, const uint8_t *pipe0, const uint8_t *pipe1){
 
 	radio.startListening();
 }
+/******************************************************************************/
 
 
+/******************************************************************************/
 int sendcode(RF24& radio, unsigned long code){
 	int error = 0;
 
@@ -64,7 +68,8 @@ int sendcode(RF24& radio, unsigned long code){
 		radio.read( &got_code, sizeof(unsigned long) );
 
 		// Spew it
-		printf("Got response %lu, round-trip delay: %lu\n",got_code,millis()-got_code);
+		printf("Got response %lu, round-trip delay: %lu\n",
+			got_code,millis()-got_code);
 
 		if(got_code != ((code)%1000 + 202000)){
 			error = 1;
@@ -73,8 +78,10 @@ int sendcode(RF24& radio, unsigned long code){
 	return error;
 	//sleep(1);
 }
+/******************************************************************************/
 
 
+/******************************************************************************/
 unsigned long readcode(RF24& radio){
 	unsigned long got_code;
 
@@ -99,3 +106,4 @@ unsigned long readcode(RF24& radio){
 	}
 	return got_code;
 }
+/******************************************************************************/
