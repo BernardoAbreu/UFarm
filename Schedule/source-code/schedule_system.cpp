@@ -13,8 +13,10 @@ int main(){
 
     setup(radio, pipes[0], pipes[1]);
 
-    sch.addValve( Valve_info( Valve(1), 1, 2, Reset(16,51,true) ) );
-    sch.addValve( Valve_info( Valve(2), 2, 1 ) );
+    sch.addValve( Valve_info( Valve(1,1), 1, 2, Reset(16,51,true) ) );
+    sch.addValve( Valve_info( Valve(1,2), 2, 1 ) );
+    sch.addValve( Valve_info( Valve(1,3), 3, 3 ) );
+    sch.addValve( Valve_info( Valve(1,4), 2, 4 ) );
 
     sch.setOutFile("info.txt");
     

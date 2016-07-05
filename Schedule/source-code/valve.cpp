@@ -6,7 +6,7 @@
 Valve::Valve(){
 	number = 0;
     state = false;
-	code = 1111;
+	code = 11100;
     valveState = false;
 }
 /******************************************************************************/
@@ -14,10 +14,10 @@ Valve::Valve(){
 
 /******************************************************************************/
 // constructor
-Valve::Valve(int num){
+Valve::Valve(int cluster, int num){
 	number = num;
     state = false;
-	code = 11110 + num;
+	code = 11100 + cluster*10 + num;
     valveState = false;
 }
 /******************************************************************************/

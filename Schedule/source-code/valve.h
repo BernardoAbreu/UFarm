@@ -28,9 +28,10 @@ class Valve{
 		 * Initializes the number of valve with the parameter received, both
 		 * the state and valveState as false and the code as 100.
 		 *
-		 * @param int The number of the valve to be created
+		 * @param int The number of the arduino connected to the valve
+		 * @param int The number of valve to be created
 		 */
-		Valve(int);
+		Valve(int, int);
 
 
 		/**
