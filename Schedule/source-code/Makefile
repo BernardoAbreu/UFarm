@@ -1,3 +1,5 @@
+CC  = gcc
+CXX = g++
 
 # Let’s leave a place holder for additional include directories
 
