@@ -54,7 +54,7 @@ void Schedule::removeValve(int num){
 
 
 
-void Schedule::monitorValves(){
+void Schedule::monitorValves(RF24& radio){
         Time time;
 
         if (last_minute != time.getMinute()){
@@ -85,7 +85,7 @@ void Schedule::monitorValves(){
                         out << "Checking valve " << v.getValve().getNumber();
                         cout << "Checking valve " << v.getValve().getNumber();
                                 
-                        bool state_ok = v.getValve().readState();
+                        bool state_ok = v.getValve().readState(radio);
                         
                         if (state_ok){
 
@@ -111,7 +111,7 @@ void Schedule::monitorValves(){
                     if (v.getValve().getState()){
                         if (passed_time/60.0 >= v.getOpen()){
 
-                            v.getValve().sendState(false);
+                            v.getValve().sendState(radio, false);
                             v.setLastTime(time);
                             
                             if (!checknow){
@@ -129,7 +129,7 @@ void Schedule::monitorValves(){
                     else{     
                         if ( passed_time / 60.0 >= v.getClosed() ) {
 
-                            v.getValve().sendState(true);
+                            v.getValve().sendState(radio, true);
                             v.setLastTime(time);
                            
                             if (!checknow){

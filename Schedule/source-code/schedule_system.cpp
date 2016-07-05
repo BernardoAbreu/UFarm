@@ -32,7 +32,7 @@ int main(){
     out.close();
     
     while (true){
-        sch.monitorValves();
+        sch.monitorValves(radio);
     }
 
     return 0;

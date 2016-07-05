@@ -6,7 +6,7 @@
 Valve::Valve(){
 	number = 0;
     state = false;
-	code = 100;
+	code = 1111;
     valveState = false;
 }
 /******************************************************************************/
@@ -17,7 +17,7 @@ Valve::Valve(){
 Valve::Valve(int num){
 	number = num;
     state = false;
-	code = 100 + num;
+	code = 1111 + num;
     valveState = false;
 }
 /******************************************************************************/
@@ -53,10 +53,10 @@ Valve& Valve::operator=(const Valve& v){
 
 /******************************************************************************/
 //TODO
-int Valve::sendState(bool st) {
+int Valve::sendState(RF24& radio, bool st) {
 	unsigned long cd = code*10 + st;
 
-	int error = 0;
+	int error = sendcode(radio, cd);
 
 	if (!error){
 		this->setState(st);
@@ -72,11 +72,11 @@ int Valve::sendState(bool st) {
 
 /******************************************************************************/
 //TODO
-bool Valve::readState() {
+bool Valve::readState(RF24& radio) {
 	unsigned long new_code;
 
-	//new_code = readcode();
-	new_code = 100110;
+	new_code = readcode(radio);
+	//new_code = 100110;
 
 	//TODO
 	/***********************/

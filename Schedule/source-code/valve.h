@@ -1,6 +1,8 @@
 #ifndef __VALVE_H__
 #define __VALVE_H__
 
+#include rfsignal.h
+
 using namespace std;
 
 class Valve{

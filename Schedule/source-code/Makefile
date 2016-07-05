@@ -1,4 +1,4 @@
-CC  = gcc
+CC  = g++
 CXX = g++
 
 # Let’s leave a place holder for additional include directories
@@ -22,19 +22,20 @@ LDFLAGS = -g
 LDLIBS = -lrf24
 
 
-#schedule_system: schedule_system.o schedule.o valve_info.o reset.o time.o valve.o
+schedule_system: schedule_system.o schedule.o valve_info.o reset.o time.o valve.o
 test: test.o rfsignal.o
-#schedule_system.o: schedule.h
 
-#schedule.o: schedule.h valve_info.h
+schedule_system.o: schedule.h
 
-#valve_info.o:  valve_info.h valve.h reset.h time.h
+schedule.o: schedule.h valve_info.h
 
-#reset.o: reset.h time.h
+valve_info.o:  valve_info.h valve.h reset.h time.h
 
-#time.o: time.h
+reset.o: reset.h time.h
 
-#valve.o: valve.h
+time.o: time.h
+
+valve.o: valve.h
 
 rfsignal.o: rfsignal.h
 
