@@ -1,5 +1,3 @@
-CC  = g++
-CXX = g++
 
 # Let’s leave a place holder for additional include directories
 
@@ -19,11 +17,10 @@ LDFLAGS = -g
 # List the libraries you need to link with in LDLIBS
 # For example, use "-lm" for the math library
 
-LDLIBS =
+LDLIBS = -lrf24
 
 
 schedule_system: schedule_system.o schedule.o valve_info.o reset.o time.o valve.o
-
 
 schedule_system.o: schedule.h
 
