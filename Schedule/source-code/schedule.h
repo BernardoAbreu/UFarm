@@ -41,7 +41,7 @@ class Schedule{
         void removeValve(int);
 
 
-        void monitorValves();
+        void monitorValves(RF24&);
 
 
         void setOutFile(string out) { outfile = out; }

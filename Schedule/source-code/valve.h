@@ -1,7 +1,7 @@
 #ifndef __VALVE_H__
 #define __VALVE_H__
 
-#include rfsignal.h
+#include "rfsignal.h"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ class Valve{
 		 */
 		Valve();
 
-		
+
 		/**
 		 * Constructor
 		 *
@@ -31,7 +31,7 @@ class Valve{
 		 */
 		Valve(int);
 
-		
+
 		/**
 		 * Copy Constructor
 		 *
@@ -52,7 +52,7 @@ class Valve{
 		 * @return Reference to this valve.
 		 */
 		Valve& operator=(const Valve& v);
-		
+
 
 		/**
 		 * Get method for returning valve number
@@ -60,14 +60,14 @@ class Valve{
 		 * @return Valve number
 		 */
 		int getNumber() const { return number; }
-        
+
 
         /**
          * Set Method for defining the expetec state
          * @param st The state to be set
          */
         void setState(bool st) { state = st; }
-        
+
 
     	/**
     	 * Get method for returning expected state
@@ -75,8 +75,8 @@ class Valve{
 		 * @return The expected Valve state
     	 */
     	bool getState() const { return state; }
-        
-        
+
+
         /**
          * Sets the actual state of the Valve. Uses sendState() function to
          * send the new State by radio.
@@ -84,7 +84,7 @@ class Valve{
          * @param bool The state to be set.
          */
     	void setValveState(bool st) { valveState = st; }
-        
+
 
         /**
          * Get method for obtaining the actual state of the valve. Uses
@@ -93,7 +93,7 @@ class Valve{
          * @return The actual state of the Valve.
          */
     	bool getValveState() const { return valveState; }
-        
+
 
     	/**
     	 * Sends the new state to the valve by radio.
@@ -103,7 +103,7 @@ class Valve{
     	 *              than 0 if there is.
     	 */
     	int sendState(bool);
-    	
+
 
     	/**
     	 * Reads the actual state on the Valve by radio.
@@ -111,7 +111,7 @@ class Valve{
     	 * @return The actual state of the valve
     	 */
     	bool readState();
-		
+
 
 		/**
 		 * Checks if the actual state of the is the same as the expected state
