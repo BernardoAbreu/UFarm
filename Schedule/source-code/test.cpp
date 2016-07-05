@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include <iostream>
 #include <unistd.h>
 #include <RF24/RF24.h>
@@ -20,7 +19,7 @@ int main(int argc, char** argv){
 
 	unsigned long code;
 	
-	cout << "starting Test\n";
+	cout << "Starting Test\n";
 
 	setup(pipes[0],pipes[1]);
 
