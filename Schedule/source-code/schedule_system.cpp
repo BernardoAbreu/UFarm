@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const uint8_t pipe[][6] = {"1Node","2Node"};
+const uint8_t pipes[][6] = {"1Node","2Node"};
 
 RF24 radio(22,0);
 
@@ -12,7 +12,7 @@ int main(){
 
     Schedule sch;
 
-    setup(radio, pipe[0], pipe[1]);
+    setup(radio, pipes[0], pipes[1]);
 
     sch.addValve( Valve_info( Valve(0), 1, 2, Reset(16,51,true) ) );
     sch.addValve( Valve_info( Valve(1), 2, 1 ) );
