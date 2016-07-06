@@ -10,9 +10,9 @@
 #include "RF24.h"
 
 #define arduino_number 1
-#define valve1 10
+#define valve1 12
 #define valve2 11
-#define valve3 12
+#define valve3 10
 #define valve4 9
 
 /****************** User Config ***************************/
