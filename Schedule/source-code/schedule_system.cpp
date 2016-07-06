@@ -45,7 +45,9 @@ int main(){
     cout << "Started running: " << t << endl;
 
     //Get current Date
-    string s = SSTR(t.getMonth()) + "-" + SSTR(t.getDay()) + "-" + SSTR(t.getYear());
+    string s = SSTR(t.getMonth()) + "-" + SSTR(t.getDay()) + "-" + 
+            SSTR(t.getYear());
+            
     sch.setOutFile("info-" + s + ".txt");
 
 

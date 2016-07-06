@@ -1,6 +1,4 @@
-#include <iostream>
-#include <unistd.h>
-#include <RF24/RF24.h>
+#include "rfsignal.h"
 
 
 /******************************************************************************/

@@ -91,6 +91,10 @@ bool Valve::readState(RF24& radio) {
 	//TODO
 	/***********************/
 	//Error check
+	if ((new_code/1000) == 300){
+		cerr << "Error on valve " << number << endl;
+	}
+
 	/**********************/
 
 	valveState = new_code%10;
