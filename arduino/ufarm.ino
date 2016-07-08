@@ -56,7 +56,11 @@ void getValues(unsigned long msg) {
 void sendResponse(int v) {
   unsigned long resp;
   int st = bitRead(PORTD, v);
-  
+  Serial.println(PD6);
+  Serial.println(PB7);
+  Serial.println(PB6);
+  Serial.println(PB5);
+  Serial.println(st);
   resp = (unsigned long)202 * (unsigned long)1000;
   resp = resp + ard * 100;
   resp = resp + valve * 10;
@@ -86,6 +90,10 @@ void sendError(){
 void setup() {
   
   Serial.begin(115200);
+  
+  // while the serial stream is not open, do nothing:
+  while (!Serial) ;
+  
   Serial.println("radio on");
   radio.begin();
   // Set the PA Level low to prevent power supply related issues since this is a
@@ -106,6 +114,7 @@ void setup() {
 void loop() {
   radio.startListening();
   if (radio.available()) {
+    int v;
     unsigned long receivedMessage;
     radio.read(&receivedMessage, sizeof(receivedMessage));
     Serial.print("Got message ");
@@ -113,26 +122,28 @@ void loop() {
     getValues(receivedMessage);
     radio.stopListening();
     //check if message is valid
+
+          
+    switch (valve) {
+      case 1:
+        v = valve1;
+        break;
+      case 2:
+        v = valve2;
+        break;
+      case 3:
+        v = valve3;
+        break;
+      case 4:
+        v = valve4;
+        break;
+      default:
+        v = 0;
+        break;
+    }
+      
     if ((ard == arduino_number) && (code == 111) && ((valve > 0) && (valve < 5)) && ((state == 1) || (state == 0))) {
-      int v;
-      switch (valve) {
-        case 1:
-          digitalWrite(valve1, state);
-          v = valve1;
-          break;
-        case 2:
-          digitalWrite(valve2, state);
-          v = valve2;
-          break;
-        case 3:
-          digitalWrite(valve3, state);
-          v = valve3;
-          break;
-        case 4:
-          digitalWrite(valve4, state);
-          v = valve4;
-          break;
-      }
+      digitalWrite(v, state);
       sendResponse(v);
     }else if ((ard == arduino_number) && (code == 110) && ((valve > 0) && (valve < 5)) && (state == 0)){
       sendResponse(v);
