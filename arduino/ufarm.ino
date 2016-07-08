@@ -21,11 +21,27 @@
 RF24 radio(7, 8);
 /**********************************************************/
 
+
+/*
+ * INCOMING MESSAGE FORMAT
+ * 111121
+ * 
+ * FIRST 3 NUMBERS 
+ * 111 = incoming
+ * 202 = response (ok)
+ * 300 = response (error)
+ * 
+ * 4TH DIGIT (1) = ARDUINO NUMBER (as there will be multiple arduinos) 
+ * 5TH DIGIT (2) = VALVE TO HAVE ITS VALUE SET (1 TO 4)
+ * 6TH DIGIT (1) = VALVE STATE (1 = 0N. 0 = 0FF)
+ */
+
 byte addresses[][6] = {"1Node", "2Node"};
 unsigned long code, ard, valve, state;
 // Used to control whether this node is sending or receiving
 int error = 0;
 
+//Extract all the values from the incoming message 
 void getValues(unsigned long msg) {
   state = msg % 10;
   msg = msg / 10;
@@ -36,13 +52,15 @@ void getValues(unsigned long msg) {
   code = msg;
 }
 
-void sendResponse() {
+//Send response back. 202 = OK.
+void sendResponse(int v) {
   unsigned long resp;
+  int st = bitRead(PORTD, v);
   
   resp = (unsigned long)202 * (unsigned long)1000;
   resp = resp + ard * 100;
   resp = resp + valve * 10;
-  resp = resp + state;
+  resp = resp + st;
 
   radio.write(&resp, sizeof(resp));
   Serial.print("Response ");
@@ -50,6 +68,7 @@ void sendResponse() {
   Serial.println(" sent.");
 }
 
+//Send eror message in case the incoming message is valid. 300 = ERROR
 void sendError(){
   unsigned long resp;
 
@@ -67,12 +86,13 @@ void sendError(){
 void setup() {
   
   Serial.begin(115200);
-  delay(5000);
   Serial.println("radio on");
   radio.begin();
   // Set the PA Level low to prevent power supply related issues since this is a
   // getting_started sketch, and the likelihood of close proximity of the devices. RF24_PA_MAX is default.
   radio.setPALevel(RF24_PA_LOW);
+
+  //set all valve pins as output.
   pinMode(valve1, OUTPUT);
   pinMode(valve2, OUTPUT);
   pinMode(valve3, OUTPUT);
@@ -91,24 +111,31 @@ void loop() {
     Serial.print("Got message ");
     Serial.println(receivedMessage);
     getValues(receivedMessage);
+    //check if message is valid
     if ((ard == arduino_number) && (code == 111) && ((valve > 0) && (valve < 5)) && ((state == 1) || (state == 0))) {
-      
+      int v;
       switch (valve) {
         case 1:
           digitalWrite(valve1, state);
+          v = valve1;
           break;
         case 2:
           digitalWrite(valve2, state);
+          v = valve2;
           break;
         case 3:
           digitalWrite(valve3, state);
+          v = valve3;
           break;
         case 4:
           digitalWrite(valve4, state);
+          v = valve4;
           break;
       }
       radio.stopListening();
-      sendResponse();
+      sendResponse(v);
+    }else if ((ard == arduino_number) && (code == 110) && ((valve > 0) && (valve < 5)) && (state == 0)){
+      sendResponse(v);
     }else{
       radio.stopListening();
       sendError();
