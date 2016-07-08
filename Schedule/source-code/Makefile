@@ -23,7 +23,7 @@ LDLIBS = -lrf24
 
 
 schedule_system: schedule_system.o schedule.o valve_info.o reset.o time.o valve.o rfsignal.o
-#test: test.o rfsignal.o
+test: test.o rfsignal.o
 
 schedule_system.o: schedule.h
 
@@ -42,10 +42,10 @@ rfsignal.o: rfsignal.h
 
 .PHONY: clean
 clean:
-	rm -f *.o a.out core schedule_system
+	rm -f *.o a.out core schedule_system test
 
 # "all" target is useful if your Makefile builds multiple programs.
 # Here we’ll have it first do "clean", and rebuild the main target.
 
 .PHONY: all
-all: clean schedule_system
+all: clean schedule_system test
