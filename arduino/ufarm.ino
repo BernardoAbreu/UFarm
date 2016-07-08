@@ -1,4 +1,3 @@
-
 /*
   Getting Started example sketch for nRF24L01+ radios
   This is a very basic example of how to send data from one node to another
@@ -14,6 +13,8 @@
 #define valve2 11
 #define valve3 10
 #define valve4 9
+//save valves' state
+char valves[4] = {0, 0, 0, 0}
 
 /****************** User Config ***************************/
 /***      Set this radio as radio number 0 or 1         ***/
@@ -55,16 +56,10 @@ void getValues(unsigned long msg) {
 //Send response back. 202 = OK.
 void sendResponse(int v) {
   unsigned long resp;
-  int st = bitRead(PORTD, v);
-  Serial.println(PD6);
-  Serial.println(PB7);
-  Serial.println(PB6);
-  Serial.println(PB5);
-  Serial.println(st);
   resp = (unsigned long)202 * (unsigned long)1000;
   resp = resp + ard * 100;
   resp = resp + valve * 10;
-  resp = resp + st;
+  resp = resp + valves[v];
 
   radio.write(&resp, sizeof(resp));
   Serial.print("Response ");
@@ -127,6 +122,7 @@ void loop() {
     switch (valve) {
       case 1:
         v = valve1;
+        valves[1] = 1
         break;
       case 2:
         v = valve2;
@@ -143,10 +139,11 @@ void loop() {
     }
       
     if ((ard == arduino_number) && (code == 111) && ((valve > 0) && (valve < 5)) && ((state == 1) || (state == 0))) {
+      valves[valve] = state;
       digitalWrite(v, state);
-      sendResponse(v);
+      sendResponse(valve);
     }else if ((ard == arduino_number) && (code == 110) && ((valve > 0) && (valve < 5)) && (state == 0)){
-      sendResponse(v);
+      sendResponse(valve);
     }else{
       sendError();
     }
