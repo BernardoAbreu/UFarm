@@ -111,6 +111,7 @@ void loop() {
     Serial.print("Got message ");
     Serial.println(receivedMessage);
     getValues(receivedMessage);
+    radio.stopListening();
     //check if message is valid
     if ((ard == arduino_number) && (code == 111) && ((valve > 0) && (valve < 5)) && ((state == 1) || (state == 0))) {
       int v;
@@ -132,12 +133,10 @@ void loop() {
           v = valve4;
           break;
       }
-      radio.stopListening();
       sendResponse(v);
     }else if ((ard == arduino_number) && (code == 110) && ((valve > 0) && (valve < 5)) && (state == 0)){
       sendResponse(v);
     }else{
-      radio.stopListening();
       sendError();
     }
   }
