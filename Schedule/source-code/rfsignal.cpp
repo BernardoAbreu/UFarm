@@ -25,7 +25,7 @@ void setup(RF24& radio, const uint8_t *pipe0, const uint8_t *pipe1){
 
 
 /******************************************************************************/
-int sendcode(RF24& radio, unsigned long code){
+unsigned long sendcode(RF24& radio, unsigned long code){
 	int error = 0;
 
 	// First, stop listening so we can talk.
@@ -73,7 +73,11 @@ int sendcode(RF24& radio, unsigned long code){
 			error = 1;
 		}
 	}
-	return error;
+
+	if (error){
+		got_code = 0;
+	}
+	return got_code;
 	//sleep(1);
 }
 /******************************************************************************/

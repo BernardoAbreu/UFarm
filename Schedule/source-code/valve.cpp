@@ -69,7 +69,7 @@ int Valve::sendState(RF24& radio, bool st) {
 	
 	int error = sendcode(radio, cd);
 
-	if (!error){
+	if (error){
 		this->setState(st);
 		return 0;
 	}
@@ -85,8 +85,9 @@ int Valve::sendState(RF24& radio, bool st) {
 //TODO
 bool Valve::readState(RF24& radio) {
 	unsigned long new_code;
+	unsigned long cd = (code-100)*10;
 
-	new_code = readcode(radio);
+	new_code = sendcode(radio, cd);
 
 	//TODO
 	/***********************/
