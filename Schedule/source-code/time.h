@@ -153,7 +153,7 @@ class Time{
      * Implements < operator. Return 1 if comparison is true
      * and 0 if it is not.
      */
-		friend int operator<(const Time& s1, const Time& s2) {
+		friend int operator<(const Time& t1, const Time& t2) {
         return (t1-t2) < 0;
     }
 
@@ -164,7 +164,7 @@ class Time{
      * Implements > operator. Return 1 if comparison is true
      * and 0 if it is not.
      */
-		friend int operator>(const Time& s1, const Time& s2){
+		friend int operator>(const Time& t1, const Time& t2){
         return (t1-t2) > 0;
     }
 
@@ -175,7 +175,7 @@ class Time{
      * Implements == operator. Return 1 if comparison is true
      * and 0 if it is not.
      */
-		friend int operator==(const Time& s1, const Time& s2){
+		friend int operator==(const Time& t1, const Time& t2){
         return (t1-t2) == 0;
     }
 
@@ -186,8 +186,8 @@ class Time{
      * Implements != operator. Return 1 if comparison is true
      * and 0 if it is not.
      */
-		friend int operator!=(const Time& s1, const Time& s2) {
-		    return !(s1 == s2);
+		friend int operator!=(const Time& t1, const Time& t2) {
+		    return !(t1 == t2);
 		}
 
 
@@ -197,8 +197,8 @@ class Time{
      * Implements <= operator. Return 1 if comparison is true
      * and 0 if it is not.
      */
-		friend int operator<=(const Time& s1, const Time& s2) {
-	    	return !(s1 > s2);
+		friend int operator<=(const Time& t1, const Time& t2) {
+	    	return !(t1 > t2);
 		}
 
 
@@ -208,8 +208,8 @@ class Time{
      * Implements >= operator. Return 1 if comparison is true
      * and 0 if it is not.
      */
-		friend int operator>=(const Time& s1, const Time& s2) {
-		    return !(s1 < s2);
+		friend int operator>=(const Time& t1, const Time& t2) {
+		    return !(t1 < t2);
 		}
     
 
