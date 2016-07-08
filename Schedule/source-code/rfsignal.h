@@ -21,9 +21,10 @@ void setup(RF24& radio, const uint8_t*, const uint8_t*);
  * Sends a code through a rf signal using the radio.
  * @param  radio Radio instance to transmit the code
  * @param  long  Code to be transmitted
- * @return       0 if no error occurs, 1 if an error occurs
+ * @return       The code that it's received back,
+ *                   or 0 if an error occurs
  */
-int sendcode(RF24& radio, unsigned long);
+unsigned long sendcode(RF24& radio, unsigned long);
 
 
 /**
