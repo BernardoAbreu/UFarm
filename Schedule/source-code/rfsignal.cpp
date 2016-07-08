@@ -27,6 +27,7 @@ void setup(RF24& radio, const uint8_t *pipe0, const uint8_t *pipe1){
 /******************************************************************************/
 unsigned long sendcode(RF24& radio, unsigned long code){
 	int error = 0;
+	unsigned long got_code;
 
 	// First, stop listening so we can talk.
 	radio.stopListening();
@@ -62,7 +63,7 @@ unsigned long sendcode(RF24& radio, unsigned long code){
 	else
 	{
 		// Grab the response, compare, and send to debugging spew
-		unsigned long got_code;
+		
 		radio.read( &got_code, sizeof(unsigned long) );
 
 		// Spew it
