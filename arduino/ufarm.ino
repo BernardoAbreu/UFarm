@@ -14,7 +14,7 @@
 #define valve3 10
 #define valve4 9
 //save valves' state
-char valves[4] = {0, 0, 0, 0}
+char valves[4] = {0, 0, 0, 0};
 
 /****************** User Config ***************************/
 /***      Set this radio as radio number 0 or 1         ***/
@@ -122,7 +122,6 @@ void loop() {
     switch (valve) {
       case 1:
         v = valve1;
-        valves[1] = 1
         break;
       case 2:
         v = valve2;
